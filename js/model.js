@@ -1,51 +1,44 @@
+function createAccount(username, password) {
+  return {
+    username: username,
+    password: password,
+  }
+}
+
+let accounts = []
+
+// currentAccount: {
+//   username: '',
+//   password: '',
+// },
 const model = {
-  nicknames: [],
-
-  currentAccount: {
-    name: '',
-    passwd: '',
+  setAccounts(newAccounts) {
+    accounts = newAccounts
   },
 
-  setNicknames(nicknames) {
-    this.nicknames = nicknames
+  getAccounts() {
+    return accounts
   },
 
-  createAccount(name, passwd) {
-    return {
-      name: name,
-      passwd: passwd,
-    }
-  },
-  register(name, passwd) {
-    const account = this.createAccount(name, passwd)
-    const findedAccount = this.nicknames.find(a => a.name === name)
+  register(username, password) {
+    const account = createAccount(username, password)
+    const findedAccount = accounts.find(a => a.username === username)
     if (findedAccount) {
       return false
     } else {
-      this.nicknames.push(account)
-      this.currentAccount = account
+      accounts.push(account)
       return true
     }
   },
-  login(name, passwd) {
-    const account = this.nicknames.find(
-      a => a.name === name && a.passwd === passwd
-    )
-    this.currentAccount = account
-    return account
-  },
 
-  // register(nickname) {
-  //   if (!this.nicknames.includes(nickname)) this.nicknames.push(nickname)
-  //   console.log('регистрация прошла успешно')
-  // },
-  // login(nickname) {
-  //   if (this.nicknames.includes(nickname)) {
-  //     this.currentNickname = nickname
-  //     return true
-  //   } else {
-  //     console.log('такой никнейм отсутсвует')
-  //     return false
-  //   }
-  // },
+  authenticate(username, password) {
+    const account = accounts.find(
+      a => a.username === username && a.password === password
+    )
+    if (account) {
+      //
+    } else {
+      return false
+    }
+  },
 }
