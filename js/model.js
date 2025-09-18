@@ -8,10 +8,6 @@ function createAccount(username, password) {
 let accounts = []
 let sessions = {}
 
-// currentAccount: {
-//   username: '',
-//   password: '',
-// },
 const model = {
   setAccounts(newAccounts) {
     accounts = newAccounts
@@ -19,6 +15,14 @@ const model = {
 
   getAccounts() {
     return accounts
+  },
+
+  setSessions(newSessions) {
+    sessions = newSessions
+  },
+
+  getSessions() {
+    return sessions
   },
 
   register(username, password) {
@@ -37,14 +41,35 @@ const model = {
       a => a.username === username && a.password === password
     )
     if (account) {
-      //
+      return this.startSession(account.username)
     } else {
       return false
     }
-    const sessionId = this.getSessionId()
   },
-  getSessionId() {
-    return Math.random()
+
+  authorize(sesssionId) {
+    const username = sessions[sesssionId]
+    const account = accounts.find(account => account.username === username)
+    if (account) {
+      return true
+    }
+    return false
   },
-  authorize(sesssionId) {},
+
+  startSession(username) {
+    const sessionId = Math.random()
+    sessions[sessionId] = username
+    return sessionId
+  },
 }
+
+// currentAccount: {
+//   username: '',
+//   password: '',
+// },
+
+// {
+//   '0.1234567': 'Inna'
+//   '0.2345678': 'Roma'
+//   '0.3456677': 'Foo'
+// }

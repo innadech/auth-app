@@ -19,4 +19,23 @@ const api = {
     const parsedAccounts = JSON.parse(stringifiedAccounts)
     return parsedAccounts ?? []
   },
+
+  saveSessions(sessions) {
+    const stringifiedSessions = JSON.stringify(sessions)
+    localStorage.setItem('sessions', stringifiedSessions)
+  },
+
+  restoreSessions() {
+    const stringifiedSessions = localStorage.getItem('sessions')
+    const parsedSessions = JSON.parse(stringifiedSessions)
+    return parsedSessions ?? {}
+  },
+
+  saveSessionId(sessionId) {
+    sessionStorage.setItem('sessionId', sessionId)
+  },
+
+  restoreSessionId() {
+    return sessionStorage.getItem('sessionId')
+  },
 }

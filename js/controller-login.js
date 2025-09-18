@@ -1,13 +1,27 @@
 function handleAuthenticate(username, password) {
   model.setAccounts(api.restoreAccounts())
-  if (model.authenticate(username, password)) {
+  model.setSessions(api.restoreSessions())
+
+  const sessionId = model.authenticate(username, password)
+
+  if (sessionId) {
     // api.setNickname(model.currentAccount)
-    renderDivLoginOk()
+    api.saveSessions(model.getSessions())
+    renderDivLoginSuccess()
   } else {
-    renderDivLogin()
+    renderDivLoginFail()
   }
 }
 
 function handleLoadPageLogin() {
   model.setAccounts(api.restoreAccounts())
+  model.setSessions(api.restoreSessions())
+
+  const isAuthorized = model.authorize(api.restoreSessionId())
+
+  // console.log(isAuthorized)
+
+  if (isAuthorized) {
+    renderDivAlreadyLoggedIn()
+  }
 }
