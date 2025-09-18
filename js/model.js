@@ -6,6 +6,7 @@ function createAccount(username, password) {
 }
 
 let accounts = []
+let sessions = {}
 
 // currentAccount: {
 //   username: '',
@@ -40,5 +41,10 @@ const model = {
     } else {
       return false
     }
+    const sessionId = this.getSessionId()
   },
+  getSessionId() {
+    return Math.random()
+  },
+  authorize(sesssionId) {},
 }

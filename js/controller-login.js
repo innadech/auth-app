@@ -1,8 +1,7 @@
-function handleLogin(name, passwd) {
-  const nicknames = api.getNicknames()
-  model.setNicknames(nicknames)
-  if (model.login(name, passwd)) {
-    api.setNickname(model.currentAccount)
+function handleAuthenticate(username, password) {
+  model.setAccounts(api.restoreAccounts())
+  if (model.authenticate(username, password)) {
+    // api.setNickname(model.currentAccount)
     renderDivLoginOk()
   } else {
     renderDivLogin()
