@@ -51,7 +51,7 @@ const model = {
     const username = sessions[sesssionId]
     const account = accounts.find(account => account.username === username)
     if (account) {
-      return true
+      return { username: account.username }
     }
     return false
   },

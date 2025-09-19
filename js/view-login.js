@@ -7,14 +7,8 @@ function onClickButtonLogin() {
   handleAuthenticate(username, password)
 }
 
-function renderDivLoginFail() {
-  elDivLogin.textContent = 'Sign up first'
-}
-function renderDivLoginSuccess() {
-  elDivLogin.textContent = 'You have successfully logged in'
-}
-function renderDivAlreadyLoggedIn() {
-  elDivLogin.textContent = 'AlreadyLoggedIn'
+function renderDivSignIn(status) {
+  elDivLogin.textContent = status
 }
 
 window.onload = onLoadLogin

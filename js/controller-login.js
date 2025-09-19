@@ -1,27 +1,19 @@
 function handleAuthenticate(username, password) {
   model.setAccounts(api.restoreAccounts())
   model.setSessions(api.restoreSessions())
-
   const sessionId = model.authenticate(username, password)
-
   if (sessionId) {
-    // api.setNickname(model.currentAccount)
     api.saveSessions(model.getSessions())
-    renderDivLoginSuccess()
+    api.saveSessionId(sessionId)
+    renderDivSignIn('signing in successfully')
   } else {
-    renderDivLoginFail()
+    renderDivSignIn('signing in failure')
   }
 }
 
 function handleLoadPageLogin() {
   model.setAccounts(api.restoreAccounts())
   model.setSessions(api.restoreSessions())
-
   const isAuthorized = model.authorize(api.restoreSessionId())
-
-  // console.log(isAuthorized)
-
-  if (isAuthorized) {
-    renderDivAlreadyLoggedIn()
-  }
+  if (isAuthorized) renderDivSignIn('online')
 }
